@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>check all</title>
+  </head>
+  <script type="text/javascript">
+    
+    function checkBoxes(){
+        if(document.getElementById("cb").checked == true){
+            document.getElementById("label").innerHTML = "Uncheck All";
+            checkAll();
+        } else {
+            document.getElementById("label").innerHTML = "Check All";
+            uncheckAll();
+        }
+    }
+    
+    function checkAll(checked = true){
+        const cbs = document.querySelectorAll('input[name="pizza"]');
+        cbs.forEach((cb) => {
+            cb.checked = checked;
+        });
+    }
+    
+    function uncheckAll(checked = true){
+        checkAll(false);
+    }
+    
+    function toggle(){
+        if(document.getElementById("cb").checked == true){
+            document.getElementById("label").innerHTML = "Check All";
+            document.getElementById("cb").checked = false;
+        } else {
+          var checkIfALLChecked = ifAllChecked();
+          if(checkIfALLChecked == true){
+              alert("aaaa");
+              document.getElementById("cb").checked = true;
+              document.getElementById("label").innerHTML = "Uncheck All";
+          } else {
+              alert("not all");
+          }
+        }
+        
+    }
+    
+    function ifAllChecked(){
+        var form = document.getElementById('form1');
+        var inputs = form.getElementsByTagName('input');
+        var is_checked = false;
+        for (var x = 0; x < inputs.length; x++){
+            if(inputs[x].type == 'checkbox' && inputs[x].name == 'pizza'){
+                is_checked = inputs[x].checked;
+                if(!is_checked) return false;
+            }
+        }
+        return true;
+        alert("end of ifchekced");
+    }
+    
+  </script>
+  
+
+  <body>
+      <label for="cb" id="label">Check All</label><input onclick="checkBoxes()" type="checkbox" id="cb">
+      <br/>
+      <form class="form" id="form1" action="index.html" method="post">
+        <label><input type="checkbox" name="pizza" onclick="toggle()"/> onions</label><br/>
+        <label><input type="checkbox" name="pizza" onclick="toggle()"/> black olives</label><br/>
+        <label><input type="checkbox" name="pizza" onclick="toggle()"/> sausage</label><br/>
+        <label><input type="checkbox" name="pizza" onclick="toggle()"/> pepperoni</label>
+      </form>
+
+
+  </body>
+</html>
